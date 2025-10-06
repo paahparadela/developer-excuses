@@ -3,6 +3,8 @@ import Client from 'magic-hour';
 import { promises as fs } from 'fs';
 import path from 'path';
 
+console.log('Token available:', !!process.env.TOKEN);
+
 const client = new Client({
   token: process.env.TOKEN,
 });
@@ -13,16 +15,8 @@ export async function POST(request) {
     if (!prompt) {
       return Response.json({ error: 'Prompt is required.' }, { status: 400 });
     }
-    const publicOutputDir = path.join(process.cwd(), 'public', 'outputs');
+    console.log('Generating image with prompt:', prompt);
     
-    // Ensure public/outputs directory exists
-    try {
-      await fs.mkdir(publicOutputDir, { recursive: true });
-    } catch (err) {
-      console.warn('Warning: Could not create outputs directory:', err.message);
-      // Continue execution as the directory might already exist
-    }
-
     const createRes = await client.v1.aiImageGenerator.generate(
       {
         imageCount: 1,
@@ -31,20 +25,25 @@ export async function POST(request) {
       },
       {
         waitForCompletion: true,
-        downloadOutputs: true,
-        downloadDirectory: path.join('public', 'outputs'),
       }
     );
 
-    const generatedPaths = (createRes.downloadedPaths || []).map(filePath => {
-      const fileName = path.basename(filePath);
-      return `outputs/${fileName}`;
-    });
+    console.log('API Response:', JSON.stringify(createRes, null, 2));
+
+    // Get the direct URLs from the downloads array
+    if (!createRes.downloads || createRes.downloads.length === 0) {
+      console.error('No downloads in response');
+      return Response.json({ error: 'No image downloads received from API' }, { status: 500 });
+    }
+
+    const imageUrls = createRes.downloads.map(download => download.url);
+    
+    console.log('Image URLs:', imageUrls);
 
     return Response.json({
       id: createRes.id,
       creditsCharged: createRes.creditsCharged,
-      downloadedPaths: generatedPaths,
+      imageUrls,
       message: 'Image generated successfully.'
     });
   } catch (error) {
