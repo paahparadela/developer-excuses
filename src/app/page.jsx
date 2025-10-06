@@ -52,13 +52,22 @@ export default function MagicHourPage() {
                 body: JSON.stringify({ prompt: generatedPrompt }),
             });
             const data = await res.json();
-            if (res.ok && data.downloadedPaths && data.downloadedPaths[0]) {
-                setImageUrl(`/outputs/${data.downloadedPaths[0].split("outputs/")[1]}`);
-            } else {
-                setError(data.error || "Failed to generate image.");
+            console.log('API Response:', data);
+            
+            if (!res.ok) {
+                setError(`HTTP Error: ${res.status} - ${data.error || 'Unknown error'}`);
+                return;
             }
+            
+            if (!data.imageUrls || !data.imageUrls[0]) {
+                setError(`No image URL in response: ${JSON.stringify(data)}`);
+                return;
+            }
+            
+            setImageUrl(data.imageUrls[0]);
         } catch (err) {
-            setError("Request failed.");
+            console.error('Error details:', err);
+            setError(`Request failed: ${err.message}`);
         }
         setLoading(false);
     }
