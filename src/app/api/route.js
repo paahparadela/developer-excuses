@@ -13,6 +13,16 @@ export async function POST(request) {
     if (!prompt) {
       return Response.json({ error: 'Prompt is required.' }, { status: 400 });
     }
+    const publicOutputDir = path.join(process.cwd(), 'public', 'outputs');
+    
+    // Ensure public/outputs directory exists
+    try {
+      await fs.mkdir(publicOutputDir, { recursive: true });
+    } catch (err) {
+      console.warn('Warning: Could not create outputs directory:', err.message);
+      // Continue execution as the directory might already exist
+    }
+
     const createRes = await client.v1.aiImageGenerator.generate(
       {
         imageCount: 1,
@@ -22,25 +32,19 @@ export async function POST(request) {
       {
         waitForCompletion: true,
         downloadOutputs: true,
-        downloadDirectory: 'outputs',
+        downloadDirectory: path.join('public', 'outputs'),
       }
     );
 
-    // Move generated images to public/outputs where they can be served
-    const movedPaths = [];
-    for (const filePath of createRes.downloadedPaths || []) {
+    const generatedPaths = (createRes.downloadedPaths || []).map(filePath => {
       const fileName = path.basename(filePath);
-      const destDir = path.join(process.cwd(), 'public', 'outputs');
-      const destPath = path.join(destDir, fileName);
-      await fs.mkdir(destDir, { recursive: true });
-      await fs.copyFile(filePath, destPath);
-      movedPaths.push(`outputs/${fileName}`);
-    }
+      return `outputs/${fileName}`;
+    });
 
     return Response.json({
       id: createRes.id,
       creditsCharged: createRes.creditsCharged,
-      downloadedPaths: movedPaths,
+      downloadedPaths: generatedPaths,
       message: 'Image generated successfully.'
     });
   } catch (error) {
