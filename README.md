@@ -2,6 +2,10 @@
 
 A fun web application that generates memes from classic developer excuses! Built with Next.js and Magic Hour AI.
 
+## Demo
+
+![Demo of IT Excuses Generator](demo.gif)
+
 ## Features
 
 - Choose from different categories of IT excuses:
