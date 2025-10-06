@@ -1,0 +1,63 @@
+{
+  "frontend": [
+    "It works on my machine.",
+    "That’s not a bug, that’s a feature.",
+    "You must be using it wrong.",
+    "It only happens when you click too fast.",
+    "It’s a CSS issue on your browser.",
+    "The design wasn’t responsive to begin with.",
+    "It worked in Chrome.",
+    "The button is not broken, it’s just minimalist UI."
+  ],
+  "backend": [
+    "It’s a caching issue.",
+    "It was working yesterday.",
+    "That’s an edge case.",
+    "It’s a race condition.",
+    "I swear it passed all my unit tests.",
+    "The bug is caused by a third-party library.",
+    "It’s working as designed.",
+    "We didn’t have time for proper testing."
+  ],
+  "devops": [
+    "DNS propagation takes time.",
+    "It’s a permissions issue.",
+    "The server is under heavy load.",
+    "We’re waiting on the cloud provider.",
+    "Some packets must have been dropped.",
+    "There’s an issue upstream, not on our side.",
+    "We need to reboot the server.",
+    "It’s an intermittent issue, can’t reproduce."
+  ],
+  "qa": [
+    "It’s not a bug, it’s an undocumented feature.",
+    "That bug is actually low priority.",
+    "The QA environment is different from production.",
+    "It works fine locally.",
+    "You’re holding it wrong.",
+    "It’s a test data problem, not code.",
+    "That’s not in the acceptance criteria.",
+    "We’ll fix it in the next sprint."
+  ],
+  "management": [
+    "It’s in the backlog.",
+    "The deadline was too short.",
+    "That wasn’t in the requirements.",
+    "The intern wrote that part.",
+    "We’ll fix it in the next sprint.",
+    "That’s out of scope.",
+    "We didn’t have budget for that.",
+    "We’ll deal with it in phase two."
+  ],
+  "funny": [
+    "The code works, but reality is wrong.",
+    "It’s a legacy feature from last week.",
+    "I didn’t break it, I just found it broken.",
+    "That’s a known unknown.",
+    "The AI must have learned the wrong thing.",
+    "I don’t remember writing that part, must be past me.",
+    "It’s quantum behavior — works until you look at it.",
+    "It’s a Schrödinger bug: exists only when observed.",
+    "It’s not broken, it’s future-proofed."
+  ]
+}
