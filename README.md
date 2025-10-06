@@ -1,4 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IT Excuses Generator
+
+A fun web application that generates memes from classic developer excuses! Built with Next.js and Magic Hour AI.
+
+## Demo
+
+![Demo of IT Excuses Generator](demo.gif)
+
+## Features
+
+- Choose from different categories of IT excuses:
+  - Frontend
+  - Backend
+  - DevOps
+  - QA
+  - Management
+  - Funny
+
+- Get random, humorous developer excuses for each category
+- Automatically generates a meme image based on the selected excuse
+- Retro-style interface with pixel font
+- Responsive design that works on all devices
 
 ## Getting Started
 
@@ -16,18 +37,34 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Environment Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Create a `.env` file in the root directory
+2. Add your Magic Hour API token:
+   ```
+   TOKEN="your_magic_hour_api_token"
+   ```
 
-## Learn More
+### Running the Application
 
-To learn more about Next.js, take a look at the following resources:
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to Use
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Select a category of excuse (Frontend, Backend, DevOps, etc.)
+2. Click "Generate Excuse" to create a meme
+3. The app will:
+   - Pick a random excuse from the selected category
+   - Generate a custom meme image with the excuse text
+   - Display the result
+
+## Technical Stack
+
+- **Frontend**: Next.js 13+ with App Router
+- **Styling**: Tailwind CSS
+- **Font**: Press Start 2P for retro styling
+- **Image Generation**: Magic Hour AI API
+- **Deployment**: Vercel
 
 ## Deploy on Vercel
 

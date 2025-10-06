@@ -96,7 +96,7 @@ export default function MagicHourPage() {
                     className="bg-blue-500 text-white p-2 rounded" 
                     disabled={loading || !selectedCategory}
                 >
-                    {loading ? "Generating..." : "Generate Meme"}
+                    {loading ? "Generating..." : "Generate Excuse"}
                 </button>
             </form>
             {error && <p className="text-red-500 mt-4">{error}</p>}
